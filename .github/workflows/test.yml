@@ -36,6 +36,6 @@ jobs:
         run: |
           echo "${{ toJSON(github.event.pull_request) }}"
           echo "${{ env.foo }} and ${{ secrets.YOU }}";
-          if [[ "${{ env.foo }}" -eq "boo" ]]; then echo "boo"; else echo "hoo"; fi;
+          if [[ "${{ env.foo }}" == "boo" ]]; then echo "boo"; else echo "hoo"; fi;
     
     
