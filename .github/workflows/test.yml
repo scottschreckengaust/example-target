@@ -27,6 +27,8 @@ name: test
 jobs:
   job1:
     environment: scott
+    env:
+      FOO: "${{ vars.FOO || 'not set by environment...'}}"
     permissions:
       contents: read
     runs-on: ubuntu-latest
@@ -35,7 +37,5 @@ jobs:
         id: step1
         run: |
           if [[ "${{ env.FOO }}" == "bar" ]]; then echo "boo"; else echo "hoo"; fi;
-          echo "${{ toJSON(github.event.pull_request) }}"
-          echo "${{ env.FOO }} and ${{ secrets.YOU }}";
-    
-    
+          echo "FOO is \"${{ env.FOO }}\" and YOU is \"${{ secrets.YOU }}\" still a secret.";
+          echo "${{ toJSON(github.event.pull_request) }}"    
