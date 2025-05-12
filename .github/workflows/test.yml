@@ -35,7 +35,7 @@ jobs:
         id: step1
         run: |
           echo "${{ toJSON(github.event.pull_request) }}"
-          echo "${{ env.foo }} and ${{ secrets.YOU }}";
-          if [[ "${{ env.foo }}" == "boo" ]]; then echo "boo"; else echo "hoo"; fi;
+          echo "${{ env.FOO }} and ${{ secrets.YOU }}";
+          if [[ "${{ env.FOO }}" == "bar" ]]; then echo "boo"; else echo "hoo"; fi;
     
     
