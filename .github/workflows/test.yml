@@ -31,12 +31,11 @@ jobs:
       contents: read
     runs-on: ubuntu-latest
     steps:
-      - name: Step 1 ${{ github.event }} ${{ github.event_type }}
-        id: step-1
-        
+      - name: "Step 1 ${{ github.event }} ${{ github.event_type }}"
+        id: step1
         run: |
           echo "${{ toJSON(github.event.pull_request) }}"
-          echo "${{ env.foo }} and ${{ secret.YOU }";
+          echo "${{ env.foo }} and ${{ secret.YOU }}";
           if [[ "${{ env.foo }}" -eq "boo" ]]; then echo "boo"; else echo "hoo"; fi;
     
     
