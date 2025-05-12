@@ -1,0 +1,41 @@
+on:
+  pull_request_target:
+    branches: ["main"]
+    types:
+      - assigned
+      - unassigned
+      - labeled
+      - unlabeled
+      - opened
+      - edited
+      - closed
+      - reopened
+      - synchronize
+      - converted_to_draft
+      - ready_for_review
+      - locked
+      - unlocked
+      - review_requested
+      - review_request_removed
+      - auto_merge_enabled
+      - auto_merge_disabled
+
+permissions: {}
+
+name: test
+
+jobs:
+  job1:
+    environment: scott
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1 ${{ github.event }} ${{ github.event_type }}
+        id: step-1
+        run: |
+          echo "${{ toJSON(github.event.pull_request) }"
+          echo "${{ env.foo }} and ${{ secret.YOU }";
+          if [[ "${{ env.foo }}" -eq "boo" ]]; then echo "boo"; else echo "hoo"; fi;
+    
+    
