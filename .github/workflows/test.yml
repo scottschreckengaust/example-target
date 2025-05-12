@@ -28,7 +28,8 @@ jobs:
   job1:
     environment: scott
     env:
-      FOO: "${{ vars.FOO || 'not set by environment...'}}"
+      FOO: "${{ vars.FOO || 'not set by environment...' }}"
+      YOU: "${{ secrets.YOU || 'not set by environment...' }}"
     permissions:
       contents: read
     runs-on: ubuntu-latest
@@ -36,6 +37,6 @@ jobs:
       - name: "Step 1"
         id: step1
         run: |
-          if [[ "${{ env.FOO }}" == "bar" ]]; then echo "boo"; else echo "hoo"; fi;
-          echo "FOO is \"${{ env.FOO }}\" and YOU is \"${{ secrets.YOU }}\" still a secret.";
-          echo "${{ toJSON(github.event.pull_request) }}"    
+          if [[ "${{ env.FOO }}" == "not set by environment..." ]]; then echo "FAIL"; else echo "SUCCESS"; fi;
+          echo "FOO is \"${{ env.FOO }}\" and YOU is \"${{ env.YOU }}\" (a secret if available).";
+          echo "EVENT: ${{ toJSON(github.event) }}"
