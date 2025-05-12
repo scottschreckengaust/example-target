@@ -1,1 +1,1 @@
-scott is great
+scott is okay
