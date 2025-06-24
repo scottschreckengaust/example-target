@@ -20,7 +20,7 @@ jobs:
         pip-compile --version;
         pip-compile --help;
         echo "${{ inputs.package }}" > ${{ runner.temp }}/requirements.in;
-        pip-compile --annotate --strip-extras --generate-hashes --allow-unsafe---output-file ${{ runner.temp }}/requirements.txt ${{ runner.temp }}/requirements.in;
+        pip-compile --annotate --strip-extras --generate-hashes --allow-unsafe --output-file ${{ runner.temp }}/requirements.txt ${{ runner.temp }}/requirements.in;
         deactivate;
         rm -r -f .venv;
         python -m venv .venv;
