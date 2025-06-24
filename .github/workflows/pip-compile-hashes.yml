@@ -15,8 +15,10 @@ jobs:
     - run: |
         pip install pip-tools
         echo "${{ inputs.package }}" > ${{ runner.temp }}/requirements.in
+        pip-compile --version
+        pip-compile --help
     - run: |
-        pip-compile --annotate --strip-extras --rebuild --generate-hashes --output-file ${{ runner.temp }}/requirements.txt ${{ runner.temp }}/requirements.in
+        pip-compile --annotate --strip-extras --generate-hashes --output-file ${{ runner.temp }}/requirements.txt ${{ runner.temp }}/requirements.in
     - uses: actions/upload-artifact@v4.6.2
       with:
         name: ${{ inputs.package }}-requirements.txt
