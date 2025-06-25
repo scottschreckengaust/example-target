@@ -17,6 +17,8 @@ jobs:
     - run: |
         python --version;
         pip --version
+        python -m pip install --upgrade 'pip < 25.1' # https://github.com/jazzband/pip-tools/issues/2176
+        pip --version
         # python -m venv .venv;
         # source .venv/bin/activate;
         pip install --require-hashes --requirement .github/workflows/pip-tools-requirements.txt;
