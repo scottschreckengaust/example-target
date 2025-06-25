@@ -16,16 +16,19 @@ jobs:
         python-version: '3.12.11' # 3.13 does not work at the moment
     - run: |
         python --version;
-        python -m venv .venv;
-        source .venv/bin/activate;
+        pip --version
+        # python -m venv .venv;
+        # source .venv/bin/activate;
         pip install --require-hashes --requirement .github/workflows/pip-tools-requirements.txt;
         pip-compile --version;
         pip-compile --help;
         echo "${{ inputs.package }}" > ${{ runner.temp }}/requirements.in;
         pip-compile --annotate --strip-extras --generate-hashes --allow-unsafe --output-file ${{ runner.temp }}/requirements.txt ${{ runner.temp }}/requirements.in;
-        deactivate;
-        rm -r -f .venv;
+        # deactivate;
+        # rm -r -f .venv;
         python -m venv .venv;
+        source .venv/bin/activate;
+        pip --version
         pip install --require-hashes --requirement ${{ runner.temp }}/requirements.txt;
     - run: |
     - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 #v4.6.2
