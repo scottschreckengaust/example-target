@@ -7,6 +7,7 @@ on:
 permissions: {}
 jobs:
   pip-compile:
+    name: ${{ inputs.package }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 #v5.6.0
@@ -16,7 +17,7 @@ jobs:
         python --version;
         python -m venv .venv;
         source .venv/bin/activate;
-        pip install pip-tools;
+        pip install --require-hashes --requirement .github/workflows/pip-tools-requirements.txt;
         pip-compile --version;
         pip-compile --help;
         echo "${{ inputs.package }}" > ${{ runner.temp }}/requirements.in;
@@ -26,7 +27,7 @@ jobs:
         python -m venv .venv;
         pip install --require-hashes --requirement ${{ runner.temp }}/requirements.txt;
     - run: |
-    - uses: actions/upload-artifact@v4.6.2
+    - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 #v4.6.2
       with:
         name: ${{ inputs.package }}-requirements.txt
         path: ${{ runner.temp }}/requirements.txt
