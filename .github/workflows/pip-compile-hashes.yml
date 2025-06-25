@@ -17,11 +17,11 @@ jobs:
     - run: |
         python --version;
         pip --version
-        python -m pip install --upgrade 'pip < 25.1' # https://github.com/jazzband/pip-tools/issues/2176
+        python -m pip install --upgrade 'pip<25.1' # https://github.com/jazzband/pip-tools/issues/2176
         pip --version
         # python -m venv .venv;
         # source .venv/bin/activate;
-        pip install pip-tools==7.4.1 # --require-hashes --requirement .github/workflows/pip-tools-requirements.txt;
+        pip install pip-tools==7.4.1 pip<25.1 # --require-hashes --requirement .github/workflows/pip-tools-requirements.txt;
         pip-compile --version;
         pip-compile --help;
         echo "${{ inputs.package }}" > ${{ runner.temp }}/requirements.in;
